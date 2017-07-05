@@ -1,0 +1,525 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+<link rel="import" href="pax-info.html">
+<link rel="import" href="pax-info-child.html">
+
+<dom-module id="t-traveler-info">
+    <template>
+        <style>
+            .item[smallMobileView] #toolbarRoom {
+                background-color: var(--toolbar-background-color);
+                width: 100%;
+                height: 50px;
+                margin-left: -14px;
+            }
+
+            .item[smallMobileView] #productPassengers {
+                width: 100%;
+                margin-left: 3px;
+            }
+
+            .item[smallMobileView] #title {
+                font-size: 14px;
+                width: 100%;
+                margin-top: -12px;
+                position: absolute;
+                margin-left: -5px;
+            }
+
+            .item[smallMobileView] #subTitle {
+                /*color: var(--color-for-subTitle);                */
+                font-size: 13px;
+                color: var(--color-for-subTitle);
+                width: 100%;
+                margin-top: 15px;
+                margin-left: -6px;
+            }
+
+            .item[smallMobileView] #policyList {
+                font-size: 13px;
+                margin-left: -18px;
+            }
+
+            .item[smallMobileView] #closeIcon {
+                margin-top: 4%;
+                margin-left: -16px;
+                color: #A8A8A8;
+            }
+
+            .item[mobileView] #toolbarRoom {
+                background-color: var(--toolbar-background-color);
+                width: 100%;
+                height: 50px;
+                margin-left: -14px;
+            }
+
+            .item[mobileView] #productPassengers {
+                width: 100%;
+            }
+
+            .item[mobileView] #title {
+                font-size: 14px;
+                width: 100%;
+                margin-top: -12px;
+                position: absolute;
+                margin-left: -5px;
+            }
+
+            .item[mobileView] #subTitle {
+                /*color: var(--color-for-subTitle);                */
+                font-size: 13px;
+                color: var(--color-for-subTitle);
+                width: 100%;
+                margin-top: 15px;
+                margin-left: -6px;
+            }
+
+            .item[mobileView] #policyList {
+                font-size: 13px;
+                margin-left: -18px;
+            }
+
+            .item[mobileView] #closeIcon {
+                margin-top: 4%;
+                margin-left: -14px;
+                color: #A8A8A8;
+            }
+
+            .item[tabletView] #toolbarRoom {
+                background-color: var(--toolbar-background-color);
+                width: 100%;
+                height: 50px;
+                margin-left: -6px;
+            }
+
+            .item[tabletView] #productPassengers {
+                width: 64%;
+            }
+
+            .item[tabletView] #extraSpace {
+                margin-top: 20px;
+                margin-left: 50px;
+                width: 30%;
+                border: 1px solid lightgray;
+                border-right: rebeccapurple solid 1px;
+            }
+
+            .item[tabletView] #title {
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            .item[tabletView] #subTitle {
+                /*color: var(--color-for-subTitle);                */
+                font-size: 13px;
+                color: var(--color-for-subTitle);
+            }
+
+            .item[tabletView] #policyList {
+                font-size: 14px;
+                margin-left: -13px;
+                width: 100%;
+            }
+
+            .item[tabletView] #closeIcon {
+                margin-top: 4%;
+                margin-left: -15px;
+                color: #A8A8A8;
+            }
+
+            #toolbarRoom {
+                background-color: var(--toolbar-background-color);
+                width: 100%;
+                margin-left: 10px;
+                margin-top: 20px;
+                height: 50px;
+            }
+
+            #productPassengers {
+                width: 65%;
+            }
+
+            #extraSpace {
+                margin-top: 20px;
+                margin-left: 50px;
+                width: 30%;
+                border: 1px solid lightgray;
+                border-right: rebeccapurple solid 1px;
+            }
+
+            #productPassengers,
+            #extraSpace {
+                float: left;
+            }
+
+            #subTitle {
+                color: var(--color-for-subTitle);
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            #title {
+                font-size: 16px;
+                padding: 5px;
+            }
+
+            #policyList {
+                color: var(--color-for-policies);
+                margin-top: 10px;
+                font-family: roboto;
+            }
+
+            #checkIcon {
+                margin-left: 10px;
+            }
+            /*#paxInfo, #closeIcon{
+                float: left;
+            }*/
+
+            #closeIcon {
+                margin-top: 3%;
+                margin-left: 18px;
+                color: #A8A8A8;
+            }
+
+            #paxInfoTemp {
+                float: left;
+                width: 108%;
+            }
+        </style>
+        <iron-media-query query="(max-width: 380px)" query-matches="{{smallMobileView}}"></iron-media-query>
+        <iron-media-query query="(min-width: 380px) and (max-width:767px)" query-matches="{{mobileView}}"></iron-media-query>
+        <iron-media-query query="(min-width: 768px) and (max-width:1023px)" query-matches="{{tabletView}}"></iron-media-query>
+        <iron-media-query query="(min-width: 1024px) and (max-width: 1200px)" query-matches="{{desktopView}}"></iron-media-query>
+        <iron-media-query query="(min-width: 1200px)" query-matches="{{largeDesktopView}}"></iron-media-query>
+
+        <div class="item" smallMobileView$="{{smallMobileView}}" desktopView$="{{desktopView}}" tabletView$="{{tabletView}}" mobileView$="{{mobileView}}"
+            largeDesktopView$="{{_largeDesktopViewOther(largeDesktopView)}}" largeDesktopViewIE$="{{_largeDesktopViewIE(largeDesktopView)}}">
+
+            <div id="productPassengers">
+                <app-toolbar id="toolbarRoom">
+                    <div id="title">{{title}}</div>
+                    <div id="titleDash" hidden$={{hideDashForMobileView}}> - </div>
+                    <div id="subTitle">{{subTitle}}</div>
+                </app-toolbar>
+
+                <div id="policyList">
+                    <template is="dom-repeat" items={{policyList}}>
+                        <br>
+                        <div>
+                            <div style="float:left">
+                                <img id="checkIcon" src="checkImage.svg" height="10" width="10">
+                            </div>
+                            <div style="margin-left:20px; margin-top:-11px"> {{item}}</div>
+                        </div>
+                    </template>
+                </div>
+                <template is="dom-repeat" items="{{adultPaxCountArray}}">
+                    <div id="paxInfoTemp">
+                        <pax-info id="adultPaxInfo{{_increaseIndex(index)}}" pax-list="{{paxListAdult}}" option="[[option]]" resources="{{resources}}"
+                            index="{{_increaseIndex(index)}}" adult-pax-count="{{adultPaxCount}}">{{item}}</pax-info>
+                        <div hidden$=[[_isCloseButtonHidden]]>
+                            <paper-icon-button icon="close" id="closeIcon" on-tap="_closePaxAdultInfo"></paper-icon-button>
+                        </div>
+                    </div>
+                </template>
+
+                <template is="dom-repeat" items="{{childPaxCountArray}}">
+                    <div id="paxInfoTemp">
+                        <pax-info-child id="childPaxInfo{{_increaseIndex(index)}}" pax-list="{{paxListChild}}" option="[[option]]" resources="{{resources}}"
+                            index="{{_increaseIndex(index)}}"></pax-info-child>
+                        <paper-icon-button icon="close" id="closeIcon" on-tap="_closePaxChildInfo"></paper-icon-button>
+                    </div>
+                </template>
+            </div>
+            <!--<div id="extraSpace">
+            </div>-->
+        </div>
+    </template>
+
+    <script>
+        /**
+         * `t-traveler-info`
+         * 
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class TTravelerInfo extends Polymer.Element {
+            static get is() {
+                return 't-traveler-info';
+            }
+            static get properties() {
+                return {
+                    title: {
+                        type: String,
+                        value: 'Room'
+                    },
+                    subTitle: {
+                        type: String,
+                    },
+                    smallMobileView: {
+                        type: Boolean,
+                        value: false
+                    },
+                    mobileView: {
+                        type: Boolean,
+                        value: false
+                    },
+                    tabletView: {
+                        type: Boolean,
+                        value: false
+                    },
+                    desktopView: {
+                        type: Boolean,
+                        value: false
+                    },
+                    largeDesktopView: {
+                        type: Boolean,
+                        value: false
+                    },
+                    hideDashForMobileView: {
+                        type: Boolean,
+                        value: false
+                        // computed: '_hideDashForMobileView()'
+                    },
+                    option: {
+                        type: Object,
+                        value: {
+                            "requiredField": [],
+                            "requiredFieldForLeadPax": []
+                        }
+                    },
+                    adultPaxCount: {
+                        type: Number,
+                        value: ''
+                    },
+                    adultPaxCountArray: {
+                        type: Array,
+                        value: ''
+                    },
+                    childPaxCount: {
+                        type: Number,
+                        value: ''
+                    },
+                    childPaxCountArray: {
+                        type: Array,
+                        value: ''
+                    },
+                    totalPaxCount: {
+                        type: Array,
+                        value: ''
+                    },
+                    paxlist: {
+                        type: Array,
+                    },
+                    paxListAdult: {
+                        type: Array,
+                    },
+                    paxListChild: {
+                        type: Array,
+                    },
+                    product: {
+                        type: Object,
+                        value: {
+                            "rooms": []
+                        }
+                    },
+                    policyList: {
+                        type: Array,
+                    },
+                    resources: {
+                        type: Object
+                    },
+                    showCloseButton: {
+                        type: Boolean,
+                        value: false
+                    },
+                    _isCloseButtonHidden: {
+                        type: Boolean,
+                        computed: '_lte(adultPaxCountArray.length , 1)'
+                    },
+                };
+            }
+            _dataForValue() {
+                var adultPax = [];
+                var adultPaxData = [];
+                for (var i = 0; i < this.adultPaxCount; i++) {
+                    adultPax[i] = Polymer.dom(this.root).querySelector("#adultPaxInfo" + (i + 1));
+                }
+                for (var j = 0; j < this.adultPaxCount; j++) {
+                    adultPaxData[i] = this.paxList[i];
+                }
+            }
+            isValid() {
+                var adultValidation = this.isValidAdult();
+                var childValidation = this.isValidChild();
+                if (!(adultValidation && childValidation)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            isValidAdult() {
+                var adultPaxInfoArray = [];
+                var validData = true;
+                for (var i = 1; i <= this.adultPaxCount; i++) {
+                    adultPaxInfoArray[i] = Polymer.dom(this.root).querySelector("#adultPaxInfo" + (i)).isValidPaxInfo();
+                }
+                for (var i = 1; i <= this.adultPaxCount; i++) {
+                    if (adultPaxInfoArray[i] === true) {
+                        validData = false;
+                    }
+                }
+                if (validData === true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            isValidChild() {
+                var childPaxInfoArray = [];
+                var validData = true;
+                for (var i = 1; i <= this.childPaxCount; i++) {
+                    childPaxInfoArray[i] = Polymer.dom(this.root).querySelector("#childPaxInfo" + (i)).isValidPaxInfoChild();
+                }
+                for (var i = 1; i <= this.childPaxCount; i++) {
+                    if (childPaxInfoArray[i] === true) {
+                        validData = false;
+                    }
+                }
+                if (validData === true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            getState(event) {
+                var adultPaxDataArray = [];
+                for (var i = 0; i < this.adultPaxCount; i++) {
+                    adultPaxDataArray[i] = Polymer.dom(this.root).querySelector("#adultPaxInfo" + (i + 1)).adultData();
+                }
+                var childPaxDataArray = [];
+                for (var i = 0; i < this.childPaxCount; i++) {
+                    childPaxDataArray[i] = Polymer.dom(this.root).querySelector("#childPaxInfo" + (i + 1)).childData();
+                }
+                var paxListArray = adultPaxDataArray.concat(childPaxDataArray);
+                this.paxList = JSON.parse(JSON.stringify(paxListArray));
+
+                return this.paxList;
+            }
+            setState(paxList) {
+                var count = this.adultPaxCount + this.childPaxCount;
+                var finalData = [];
+                for (var i = 0; i < count; i++) {
+                    finalData[i] = paxList[i];
+                }
+                console.log(finalData);
+            }
+            _lte(adultPaxCountArrayLength, hiddenButtonAdultNumber) {
+                return adultPaxCountArrayLength <= hiddenButtonAdultNumber;
+            }
+
+            _hideDashForMobileView() {
+                if (this.smallMobileView === true || this.mobileView === true) {
+                    this.hideDashForMobileView = true;
+                } else {
+                    this.hideDashForMobileView = false;
+                }
+            }
+            _closeIconIfAdultIsOnlyOne() {
+                var adultCount = this.adultPaxCount;
+                if (adultCount === 1) {
+                    this.showCloseButton = true;
+                }
+            }
+            _closePaxAdultInfo(e) {
+                this.splice('adultPaxCountArray', e.model.index, 1);
+                this.adultPaxCount = this.adultPaxCount - 1;
+                if (this.adultPaxCount === 1) {
+                    Polymer.dom(this.root).querySelector("#adultPaxInfo" + (e.model.index + 1))._lte((e.model.index +
+                        1), 1);
+                }
+            }
+            _closePaxChildInfo(e) {
+                this.splice('childPaxCountArray', e.model.index, 1);
+                this.childPaxCount = this.childPaxCount - 1;
+            }
+            _increaseIndex(index) {
+                var calIndex = index + 1;
+                return calIndex;
+            }
+            _getAdultPaxList() {
+                var paxList = this.paxlist;
+                var adults = paxList.filter(function (item) {
+                    return item.type.toLowerCase() === 'adult';
+                });
+                this.paxListAdult = adults;
+            }
+            _getChildPaxList() {
+                var paxList = this.paxlist;
+                var children = paxList.filter(function (item) {
+                    return item.type.toLowerCase() === 'child';
+                });
+                this.paxListChild = children;
+            }
+            /**
+             * Function to set view of internet explorer.       
+             * */
+            _largeDesktopViewIE(largeDesktopView) {
+                // Internet Explorer 6-11
+                var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+                return isIE && largeDesktopView;
+            }
+            /**
+             * Function for desktop view for browsers other than internet explorer.
+             * */
+            _largeDesktopViewOther(largeDesktopView) {
+                // Internet Explorer 6-11
+                var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+                return !isIE && largeDesktopView;
+            }
+            _getPaxList(index, arr) {
+                return arr[index];
+            }
+            ready() {
+                super.ready();
+
+                this._closeIconIfAdultIsOnlyOne();
+                var leadPaxInfo = this.onlyLeadPaxInfo;
+                if (leadPaxInfo === true) {
+                    this.adultPaxCount = 1;
+                    this.childPaxCount = 0;
+                }
+                var adultPax = this.adultPaxCount;
+                var childPax = this.childPaxCount;
+                var totalPax = +adultPax + +childPax;
+                var adultPaxCount1 = [];
+                for (var i = 0; i < adultPax; i++) {
+                    adultPaxCount1.push(i);
+                }
+                this.adultPaxCountArray = adultPaxCount1;
+                var childPaxCount1 = [];
+                for (var i = 0; i < childPax; i++) {
+                    childPaxCount1.push(i);
+                }
+                this.childPaxCountArray = childPaxCount1;
+                this._hideDashForMobileView();
+                this._getAdultPaxList();
+                this._getChildPaxList();
+            }
+        }
+
+        window.customElements.define(TTravelerInfo.is, TTravelerInfo);
+    </script>
+</dom-module>

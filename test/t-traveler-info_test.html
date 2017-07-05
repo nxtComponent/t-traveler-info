@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>t-traveler-info test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../t-traveler-info.html">
+  </head>
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <t-traveler-info></t-traveler-info>
+      </template>
+    </test-fixture>
+<!--
+    <test-fixture id="ChangedPropertyTestFixture">
+      <template>
+        <t-traveler-info prop1="new-prop1"></t-traveler-info>
+      </template>
+    </test-fixture>-->
+
+    <script>
+      suite('t-traveler-info', function() {
+
+        test('instantiating the element with default properties works', function() {
+          var element = fixture('BasicTestFixture');
+          assert.equal(element.title, 'Room');
+          var elementShadowRoot = element.shadowRoot;
+          var elementHeader = elementShadowRoot.querySelector("#title");
+          assert.equal(elementHeader.innerHTML, 'Room');
+        });
+
+      
+
+        test('isValid t-traveler-info input field', function(){
+          var element = fixture('BasicTestFixture');
+          var result = element.isValid();
+          assert.equal(true, result);
+        });
+
+        test('_lte t-traveler-info input field', function(){
+          var element = fixture('BasicTestFixture');
+          var result = element._lte(1,1);
+          assert.equal(true, result);
+        });
+
+        test('_closeIconIfAdultIsOnlyOne t-traveler-info input field', function(){
+          var element = fixture('BasicTestFixture');
+          element._closeIconIfAdultIsOnlyOne();
+          var result = element.showCloseButton;
+          assert.equal(false, result);
+        });
+        // test('_closePaxAdultInfo t-traveler-info input field', function(){
+        //   var element = fixture('BasicTestFixture');
+        //   element.adultPaxCount = 1;          
+        //    var e = new MouseEvent("click", {
+        //     view: window,
+        //     bubbles: true,
+        //     cancelable: true,
+        //     clientX: 20,
+        //   });
+        //   // e.model.index = 1;
+        //   var result = element._closePaxAdultInfo(e);
+        //   assert.equal(result, result);
+        // });
+        test('_increaseIndex',function(){
+          var element = fixture('BasicTestFixture');
+          var result = element._increaseIndex(1);
+          assert.equal(result, 2);
+        });
+        // test('pax-info', function(){
+        //   var element = fixture('BasicTestFixture');
+        //   element.$.adultTemp.render();
+        //   var paxInfo = element.querySelector("#adultPaxInfo");
+        // });
+
+      });
+
+    </script>
+
+  </body>
+</html>
