@@ -257,7 +257,7 @@
                     <paper-dropdown-menu label="choose guest" id="chooseGuest">
                         <paper-listbox slot="dropdown-content">
                             <template is="dom-repeat" items="{{paxList}}">
-                            <paper-item on-tap="_showPaxInfoFields">{{item.firstName}}&nbsp{{item.lastName}}</paper-item>
+                                <paper-item on-tap="_showPaxInfoFields">{{item.firstName}}&nbsp{{item.lastName}}</paper-item>
                             </template>
                             <paper-item>Add New</paper-item>
                         </paper-listbox>
@@ -637,7 +637,7 @@
             _showPaxInfoFields(e) {
                 var paxIndex = e.model.index;
                 var paxListArray = this.paxList;
-                var divPax = this.$.form.querySelector("#paxInfoDiv"+(this.index));
+                var divPax = this.$.form.querySelector("#paxInfoDiv" + (this.index));
                 var adultFirstNameData = divPax.querySelector("#adultFirstName");
                 var adultLastNameData = divPax.querySelector("#adultLastName");
                 var adultTitleData = divPax.querySelector("#adultPaxTitle");
@@ -645,13 +645,16 @@
                 var adultCountryCodeData = divPax.querySelector("#adultCountryCode");
                 var adultContactNumberData = divPax.querySelector("#adultContactNo");
 
-                adultFirstNameData.value =  paxListArray[paxIndex].firstName;
-                adultLastNameData.value =  paxListArray[paxIndex].lastName;
-                adultTitleData.value =  paxListArray[paxIndex].title;
-                adultEmailData.value =  paxListArray[paxIndex].email;
-                adultCountryCodeData.value =  paxListArray[paxIndex].countrycode;
-                adultContactNumberData.value =  paxListArray[paxIndex].contact;
-               
+                adultFirstNameData.value = paxListArray[paxIndex].firstName;
+                adultLastNameData.value = paxListArray[paxIndex].lastName;
+                adultTitleData.value = paxListArray[paxIndex].title;
+                adultEmailData.value = paxListArray[paxIndex].email;
+                adultCountryCodeData.value = paxListArray[paxIndex].countrycode;
+                adultContactNumberData.value = paxListArray[paxIndex].contact;
+
+                this.parentElement.querySelector("#closeIconAdult").classList.remove("closeIconChooseGuest");
+                this.parentElement.querySelector("#closeIconAdult").classList.add("closeIconAdult");
+
                 this.showChooseGuest = true;
                 this.showPaxInfoFields = false;
             }
@@ -924,6 +927,10 @@
             }
             ready() {
                 super.ready();
+                if (this.showChooseGuest === false) {
+                    this.parentElement.querySelector("#closeIconAdult").classList.remove("closeIconAdult");
+                    this.parentElement.querySelector("#closeIconAdult").classList.add("closeIconChooseGuest");
+                }
                 this._defaultOptionValue();
                 this._defaultResourcesValue();
                 this._showAllowFieldsForLeadPax();

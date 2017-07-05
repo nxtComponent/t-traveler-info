@@ -558,6 +558,9 @@
                 adultCountryCodeData.value = paxListArray[paxIndex].countrycode;
                 adultContactNumberData.value = paxListArray[paxIndex].contact;
 
+                this.parentElement.querySelector("#closeIconChild").classList.remove("closeIconChooseGuest");
+                this.parentElement.querySelector("#closeIconChild").classList.add("closeIconChild");
+
                 this.showChooseGuest = true;
                 this.showPaxInfoFields = false;
             }
@@ -813,6 +816,10 @@
             }
             ready() {
                 super.ready();
+                if (this.showChooseGuest === false) {
+                    this.parentElement.querySelector("#closeIconChild").classList.remove("closeIconChild");
+                    this.parentElement.querySelector("#closeIconChild").classList.add("closeIconChooseGuest");
+                }
                 this._defaultOptionValue();
                 this._defaultResourcesValue();
                 this._showAllowFields();

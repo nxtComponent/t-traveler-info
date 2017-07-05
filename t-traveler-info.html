@@ -49,10 +49,17 @@
                 margin-left: -18px;
             }
 
-            .item[smallMobileView] #closeIcon {
+            .item[smallMobileView] .closeIconAdult, .closeIconChild {
                 margin-top: 4%;
                 margin-left: -16px;
                 color: #A8A8A8;
+            }
+            .item[smallMobileView] .closeIconChooseGuest {
+                float: left;
+                position: absolute;
+                margin-top: -39px;
+                margin-left: 420px;
+                 color: #A8A8A8;
             }
 
             .item[mobileView] #toolbarRoom {
@@ -88,12 +95,18 @@
                 margin-left: -18px;
             }
 
-            .item[mobileView] #closeIcon {
+            .item[mobileView] .closeIconAdult, .closeIconChild {
                 margin-top: 4%;
                 margin-left: -14px;
                 color: #A8A8A8;
             }
-
+            .item[mobileView] .closeIconChooseGuest {
+                float: left;
+                position: absolute;
+                margin-top: -39px;
+                margin-left: 420px;
+                 color: #A8A8A8;
+            }
             .item[tabletView] #toolbarRoom {
                 background-color: var(--toolbar-background-color);
                 width: 100%;
@@ -130,12 +143,18 @@
                 width: 100%;
             }
 
-            .item[tabletView] #closeIcon {
+            .item[tabletView] .closeIconAdult, .closeIconChild {
                 margin-top: 4%;
                 margin-left: -15px;
                 color: #A8A8A8;
             }
-
+            .item[tabletView] .closeIconChooseGuest {
+                float: left;
+                position: absolute;
+                margin-top: -39px;
+                margin-left: 420px;
+                 color: #A8A8A8;
+            }
             #toolbarRoom {
                 background-color: var(--toolbar-background-color);
                 width: 100%;
@@ -185,12 +204,18 @@
                 float: left;
             }*/
 
-            #closeIcon {
+            .closeIconAdult, .closeIconChild {
                 margin-top: 3%;
                 margin-left: 18px;
                 color: #A8A8A8;
             }
-
+             .closeIconChooseGuest {
+                float: left;
+                position: absolute;
+                margin-top: -39px;
+                margin-left: 420px;
+                color: #A8A8A8;
+            }
             #paxInfoTemp {
                 float: left;
                 width: 108%;
@@ -228,7 +253,7 @@
                         <pax-info id="adultPaxInfo{{_increaseIndex(index)}}" pax-list="{{paxListAdult}}" option="[[option]]" resources="{{resources}}"
                             index="{{_increaseIndex(index)}}" adult-pax-count="{{adultPaxCount}}">{{item}}</pax-info>
                         <div hidden$=[[_isCloseButtonHidden]]>
-                            <paper-icon-button icon="close" id="closeIcon" on-tap="_closePaxAdultInfo"></paper-icon-button>
+                            <paper-icon-button icon="close" id="closeIconAdult" class="closeIconAdult" on-tap="_closePaxAdultInfo"></paper-icon-button>
                         </div>
                     </div>
                 </template>
@@ -237,7 +262,7 @@
                     <div id="paxInfoTemp">
                         <pax-info-child id="childPaxInfo{{_increaseIndex(index)}}" pax-list="{{paxListChild}}" option="[[option]]" resources="{{resources}}"
                             index="{{_increaseIndex(index)}}"></pax-info-child>
-                        <paper-icon-button icon="close" id="closeIcon" on-tap="_closePaxChildInfo"></paper-icon-button>
+                        <paper-icon-button icon="close" id="closeIconChild" class="closeIconChild" on-tap="_closePaxChildInfo"></paper-icon-button>
                     </div>
                 </template>
             </div>
