@@ -30,91 +30,16 @@
   <body>
    
       
-      <t-traveler-info id="guestInfo"
+      <t-traveler-info id="travelerInfo"
        title="Room 1"
        sub-title="Strip View, 1 King Bed | 2 Adult 2 children"
        policy-List="[]"
        adult-pax-count = "2"        
        child-pax-count = "1"
-       paxlist='[{
-                        "type": "Adult",
-                        "title": "Mr",
-                        "firstName": "John",
-                        "lastName": "Doe",
-                        "email": "john@example.com",
-                        "contact": "343453453",
-                        "countrycode": "+91",
-                        "membership": {
-                          "programName": "",
-                          "programCode": "",
-                          "number": ""
-                        }
-                      },{
-                        "type": "Adult",
-                        "title": "Ms",
-                        "firstName": "Anna",
-                        "lastName": "Smith",
-                        "email": "Anna@example.com",
-                        "contact": "343453453",
-                        "countrycode": "+91",
-                        "membership": {
-                          "programName": "",
-                          "programCode": "",
-                          "number": ""
-                        }
-                      },{
-                        "type": "Adult",
-                        "title": "Mr",
-                        "firstName": "Peter",
-                        "lastName": "Doe",
-                        "email": "Peter@example.com",
-                        "contact": "343453453",
-                        "countrycode": "+91",
-                        "membership": {
-                          "programName": "",
-                          "programCode": "",
-                          "number": ""
-                        }
-                      },{
-                        "type": "Adult",
-                        "title": "Ms",
-                        "firstName": "Nikita",
-                        "lastName": "Bachhav",
-                        "email": "Nikita@example.com",
-                        "contact": "343453453",
-                        "countrycode": "+91",
-                        "membership": {
-                          "programName": "",
-                          "programCode": "",
-                          "number": ""
-                        }
-                      },{
-                        "type": "Adult",
-                        "title": "Ms",
-                        "firstName": "Anupama",
-                        "lastName": "Kamble",
-                        "email": "anupama@example.com",
-                        "contact": "343453453",
-                        "countrycode": "+91",
-                        "membership": {
-                          "programName": "",
-                          "programCode": "",
-                          "number": ""
-                        }
-                      },{
-                        "type": "Child",
-                        "title": "Ms",
-                        "firstName": "John",
-                        "lastName": "peter",
-                        "email": "john@example.com",
-                        "contact": "343453453",
-                        "countrycode": "+91",
-                        "membership": {
-                          "programName": "",
-                          "programCode": "",
-                          "number": ""
-                        }
-                      }]'
+       room-number="1"
+       guest-info="{{guestInfo}}" only-lead-pax-info="false"
+            pax-list-available="false"
+       pax-list='[]'
        option='{
                   "allowTitle" : true,
                   "allowTitleForLeadPax" : true,
@@ -213,13 +138,9 @@
     var guestInfo = document.getElementById("guestInfo");
     var prodLen = guestInfo.product.length;
     if (valid === true) {}
-    for (var i = 0; i < prodLen; i++) {
-      var roomLen = guestInfo.product[i].rooms.length;
-      for (var j = 0; j < roomLen; j++) {
-        data[j] = Polymer.dom(guestInfo.root).querySelector("#travelerInfo" + (j + 1)).getState(event);
-      }
-      totalData[i] = data;
-    }
+   
+        data = Polymer.dom(guestInfo.root).querySelector("#travelerInfo").getState(event);
+    
   
   // for (var i = 0; i < prodLen; i++) {
   // var roomLen = guestInfo.product[i].rooms.length;
